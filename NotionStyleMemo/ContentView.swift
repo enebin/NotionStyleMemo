@@ -40,7 +40,6 @@ struct ContentView: View {
     }
 }
 
-
 enum Container {
    case Text(TextContainer)
    case Image(ImageContainer)
@@ -71,16 +70,24 @@ struct TextContainer {
 }
 
 struct ImageContainer {
-    let image: Image = Image(systemName: "person")
+    let image: Image
+    
+    init(_ image: Image = Image(systemName: "sparkles")) {
+        self.image = image
+    }
 }
 
 
 struct DocumentView: View {
     @State var text: String = ""
-    @State var isTyping = false
-    @State var isReturnPressed = false
+    @State var images: [UIImage] = [UIImage]()
     
-    var containers: [Container]
+    @State var isTyping = false
+    @State var showPicker = false
+    @State var isReturnPressed = false
+    @State var containers: [Container]
+    
+    let placeholder = "Type here"
     
     var body: some View {
         ScrollView {
@@ -93,19 +100,30 @@ struct DocumentView: View {
             }
             .padding()
         }
+        .sheet(isPresented: $showPicker) {
+            ImagePickerView(images: $images, showPicker: $showPicker, selectionLimit: 1)
+        }
     }
     
     var newContainer: some View {
         HStack {
-            Button(action: {}) {
+            Button(action: { showPicker = true }) {
                 Image(systemName: "plus")
                     .foregroundColor(isTyping ? .gray.opacity(0) : .gray.opacity(1))
             }
-            TextField("Type here", text: $text,
-                      onEditingChanged: { changed in isTyping = changed }
-                      //                      onCommit: { containers.append(.Text(TextContainer(text)))}
-                      
+            TextField(placeholder, text: $text,
+                      onEditingChanged: { changed in isTyping = changed },
+                      onCommit: {
+                containers.append(.Text(TextContainer(text)))
+                text = ""
+                images.removeAll()
+            }
             )
+        }
+        .onChange(of: images) { newValue in
+            guard let image = newValue.first else { return }
+            containers.append(.Image(ImageContainer(Image(uiImage: image))))
+            images.removeAll()
         }
     }
     
@@ -118,25 +136,32 @@ struct DocumentView: View {
             }
         }
     }
-    
 }
 
 struct TextContainerView: View {
-    let texts: TextContainer
+    @State var isModifying = false
+    @State var newText = ""
+    var texts: TextContainer
     
     var body: some View {
-        VStack {
+        HStack {
             Text(texts.text)
+            Spacer()
         }
     }
 }
 
 struct ImageContainerView: View {
-    let image: ImageContainer
+    var image: ImageContainer
     
     var body: some View {
-        VStack {
-            image.image
+        HStack {
+            Spacer()
+            self.image.image
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200)
+            Spacer()
         }
     }
 }
