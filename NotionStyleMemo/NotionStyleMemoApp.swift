@@ -11,7 +11,7 @@ import SwiftUI
 struct NotionStyleMemoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DocumentListView()
         }
     }
 }

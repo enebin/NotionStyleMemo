@@ -7,17 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B117A72271C26A500D5AAE0 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B117A71271C26A500D5AAE0 /* DocumentView.swift */; };
+		9B699506271D6EF4001AB335 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B699505271D6EF4001AB335 /* Container.swift */; };
+		9B699508271E4C27001AB335 /* DocumentView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B699507271E4C27001AB335 /* DocumentView+Extension.swift */; };
 		9B7B6E432714590A007142ED /* NotionStyleMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B6E422714590A007142ED /* NotionStyleMemoApp.swift */; };
-		9B7B6E452714590A007142ED /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B6E442714590A007142ED /* ContentView.swift */; };
+		9B7B6E452714590A007142ED /* DocumentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B6E442714590A007142ED /* DocumentListView.swift */; };
 		9B7B6E472714590D007142ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B6E462714590D007142ED /* Assets.xcassets */; };
 		9B7B6E4A2714590D007142ED /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B6E492714590D007142ED /* Preview Assets.xcassets */; };
 		9B9BBA722717FDC700F6AEE1 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9BBA712717FDC700F6AEE1 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B117A71271C26A500D5AAE0 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
+		9B699505271D6EF4001AB335 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		9B699507271E4C27001AB335 /* DocumentView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentView+Extension.swift"; sourceTree = "<group>"; };
 		9B7B6E3F2714590A007142ED /* NotionStyleMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotionStyleMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7B6E422714590A007142ED /* NotionStyleMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotionStyleMemoApp.swift; sourceTree = "<group>"; };
-		9B7B6E442714590A007142ED /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9B7B6E442714590A007142ED /* DocumentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentListView.swift; sourceTree = "<group>"; };
 		9B7B6E462714590D007142ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B7B6E492714590D007142ED /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9B9BBA712717FDC700F6AEE1 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -53,11 +59,14 @@
 		9B7B6E412714590A007142ED /* NotionStyleMemo */ = {
 			isa = PBXGroup;
 			children = (
-				9B7B6E422714590A007142ED /* NotionStyleMemoApp.swift */,
-				9B7B6E442714590A007142ED /* ContentView.swift */,
 				9B7B6E462714590D007142ED /* Assets.xcassets */,
-				9B7B6E482714590D007142ED /* Preview Content */,
+				9B699505271D6EF4001AB335 /* Container.swift */,
+				9B7B6E442714590A007142ED /* DocumentListView.swift */,
+				9B117A71271C26A500D5AAE0 /* DocumentView.swift */,
+				9B699507271E4C27001AB335 /* DocumentView+Extension.swift */,
 				9B9BBA712717FDC700F6AEE1 /* ImagePicker.swift */,
+				9B7B6E422714590A007142ED /* NotionStyleMemoApp.swift */,
+				9B7B6E482714590D007142ED /* Preview Content */,
 			);
 			path = NotionStyleMemo;
 			sourceTree = "<group>";
@@ -141,8 +150,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B9BBA722717FDC700F6AEE1 /* ImagePicker.swift in Sources */,
-				9B7B6E452714590A007142ED /* ContentView.swift in Sources */,
+				9B699506271D6EF4001AB335 /* Container.swift in Sources */,
+				9B7B6E452714590A007142ED /* DocumentListView.swift in Sources */,
 				9B7B6E432714590A007142ED /* NotionStyleMemoApp.swift in Sources */,
+				9B117A72271C26A500D5AAE0 /* DocumentView.swift in Sources */,
+				9B699508271E4C27001AB335 /* DocumentView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +293,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -311,7 +323,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
