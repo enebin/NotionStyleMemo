@@ -18,6 +18,7 @@ struct DocumentView: View {
                 container.view
             }
             .onMove(perform: moveArray)
+            .onDelete(perform: deleteRow)
             .listRowSeparator(.hidden) // for iOS 15
             NewContainer(containers: $containers, isFocused: $isFocused)
         }
@@ -32,6 +33,9 @@ struct DocumentView: View {
         self.containers.move(fromOffsets: source, toOffset: destination)
     }
     
+    private func deleteRow(at indexSet: IndexSet) {
+        self.containers.remove(atOffsets: indexSet)
+    }
 
     // Make newContainer as a struct to use @FocusState
     // Tnx to https://stackoverflow.com/a/69134653/11768262, I can solve first responder problems.
@@ -46,7 +50,7 @@ struct DocumentView: View {
 
         var body: some View {
             HStack(spacing: 2) {
-                Button(action: { showPicker = true; print("tapped") }) {
+                Button(action: { showPicker = true }) {
                     Image(systemName: "plus")
                         .foregroundColor(isTyping ? .gray.opacity(0) : .gray.opacity(1))
                         .disabled(isTyping ? true : false)

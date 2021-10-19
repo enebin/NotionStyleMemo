@@ -19,6 +19,17 @@ struct Container: Equatable, Hashable {
         self.image = image
     }
     
+    func type<MetaType>() -> MetaType? {
+        if text != nil {
+            return Text.self as? MetaType
+        }
+        if image != nil {
+            return UIImage.self as? MetaType
+        }
+        return nil
+    }
+    
+
     var view: some View {
         return Group {
             if let image = image {
