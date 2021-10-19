@@ -38,7 +38,6 @@ struct DocumentView: View {
     }
 
     // Make newContainer as a struct to use @FocusState
-    // Tnx to https://stackoverflow.com/a/69134653/11768262, I can solve first responder problems.
     private struct NewContainer: View {
         @Binding var containers: [Container]
         var isFocused: FocusState<Bool>.Binding

@@ -24,7 +24,6 @@ class DocumentListViewModel: ObservableObject {
 
 struct DocumentListView: View {
     @ObservedObject var viewModel = DocumentListViewModel()
-    @State var showSheet = false
     
     var body: some View {
         NavigationView {
