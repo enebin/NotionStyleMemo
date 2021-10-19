@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// enum way was really fascinating but as the codes got bigger, Container had to contain more in it.
+// enum way was really fascinating but as the codes got bigger, Container had to contain more things in it.
 // So I adopted a classic Struct way. It seems little bit far from MVVM model but it's pretty convenient.
 struct Container: Equatable, Hashable {
     var image: UIImage?
@@ -40,8 +40,7 @@ struct Container: Equatable, Hashable {
         
         var body: some View {
             HStack {
-                CustomTextField(text: $text, isFirstResponder: $isFirstResponder)
-//                TextField("Type here", text: $text)
+                TextField("Type here", text: $text)
                 Spacer()
             }
         }
