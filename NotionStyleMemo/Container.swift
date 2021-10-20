@@ -7,17 +7,51 @@
 
 import SwiftUI
 
+
 // enum way was really fascinating but as the codes got bigger, Container had to contain more things in it.
 // So I adopted a classic Struct way. It seems little bit far from MVVM model but it's pretty convenient.
-struct Container: Equatable, Hashable {
-    var image: UIImage?
+
+// Actually UIImage is not codable, let's make some stuffs to solve it.
+struct Container: Identifiable, Equatable, Hashable, Codable {
     var text: String?
+    var image: UIImage?
+    var id: UUID
     
     init(text: String? = nil, image: UIImage? = nil) {
         // Additional bug handling needed
         self.text = text
         self.image = image
+        self.id = UUID()
     }
+    
+    enum CondingKeys: CodingKey {
+        case text
+        case image
+        case id
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CondingKeys.self)
+        
+        text = try container.decode(String.self, forKey: .text)
+        if let text = try container.decodeIfPresent(String.self, forKey: .image) {
+            if let data = Data(base64Encoded: text) {
+                image = UIImage(data: data)
+            }
+        }
+        id = try container.decode(UUID.self, forKey: .id)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CondingKeys.self)
+        
+        try container.encode(text, forKey: .text)
+        if let image = image, let data = image.pngData() {
+            try container.encode(data, forKey: .image)
+        }
+        try container.encode(id, forKey: .id)
+    }
+    
     
     func type<MetaType>() -> MetaType? {
         if text != nil {

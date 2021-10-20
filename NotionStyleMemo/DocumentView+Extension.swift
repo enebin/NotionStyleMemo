@@ -14,3 +14,15 @@ extension View {
                                         to: nil, from: nil, for: nil)
     }
 }
+
+extension Array where Element == Document{
+    func json() throws -> Data {
+        return try JSONEncoder().encode(self)
+    }
+}
+
+extension Array where Element == Container{
+    func json() throws -> Data {
+        return try JSONEncoder().encode(self)
+    }
+}

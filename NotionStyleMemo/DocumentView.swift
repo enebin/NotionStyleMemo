@@ -9,12 +9,12 @@
 import SwiftUI
 
 struct DocumentView: View {
-    @State var containers: [Container]
     @FocusState  var isFocused: Bool
+    @Binding var containers: [Container]
     
     var body: some View {
         List {
-            ForEach(containers, id: \.self) { container in
+            ForEach(containers, id: \.id) { container in
                 container.view
             }
             .onMove(perform: moveArray)
@@ -30,11 +30,11 @@ struct DocumentView: View {
     }
     
     private func moveArray(from source: IndexSet, to destination: Int) {
-        self.containers.move(fromOffsets: source, toOffset: destination)
+        containers.move(fromOffsets: source, toOffset: destination)
     }
     
     private func deleteRow(at indexSet: IndexSet) {
-        self.containers.remove(atOffsets: indexSet)
+        containers.remove(atOffsets: indexSet)
     }
 
     // Make newContainer as a struct to use @FocusState
@@ -75,9 +75,9 @@ struct DocumentView: View {
         }
     }
 }
-
-struct DocumentView_Previews: PreviewProvider {
-    static var previews: some View {
-        DocumentView(containers: [])
-    }
-}
+//
+//struct DocumentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DocumentView()
+//    }
+//}
