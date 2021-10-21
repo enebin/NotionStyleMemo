@@ -31,27 +31,37 @@ struct Container: Identifiable, Equatable, Hashable, Codable {
     }
     
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CondingKeys.self)
+        let decodeContainer = try decoder.container(keyedBy: CondingKeys.self)
         
-        text = try container.decode(String.self, forKey: .text)
-        if let text = try container.decodeIfPresent(String.self, forKey: .image) {
-            if let data = Data(base64Encoded: text) {
-                image = UIImage(data: data)
+        if let text = try decodeContainer.decodeIfPresent(String.self, forKey: .text) {
+            self.text = text
+        }
+
+        if let base64 = try decodeContainer.decodeIfPresent(String.self, forKey: .image) {
+            if let data = Data(base64Encoded: base64) {
+                self.image = UIImage(data: data)
             }
         }
-        id = try container.decode(UUID.self, forKey: .id)
+        
+        id = try decodeContainer.decode(UUID.self, forKey: .id)
     }
     
     func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CondingKeys.self)
+        var encodeContainer = encoder.container(keyedBy: CondingKeys.self)
         
-        try container.encode(text, forKey: .text)
-        if let image = image, let data = image.pngData() {
-            try container.encode(data, forKey: .image)
+        try encodeContainer.encode(text, forKey: .text)
+        if let image = image, let data = convertImageToBase64String(from: image) {
+            try encodeContainer.encode(data, forKey: .image)
         }
-        try container.encode(id, forKey: .id)
+        try encodeContainer.encode(id, forKey: .id)
     }
     
+    private func convertImageToBase64String (from img: UIImage?) -> String? {
+        if let image = img {
+            return image.jpegData(compressionQuality: 1)?.base64EncodedString()
+        }
+        return nil
+    }
     
     func type<MetaType>() -> MetaType? {
         if text != nil {
@@ -63,7 +73,6 @@ struct Container: Identifiable, Equatable, Hashable, Codable {
         return nil
     }
     
-
     var view: some View {
         return Group {
             if let image = image {

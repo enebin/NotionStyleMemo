@@ -19,7 +19,6 @@ class DocumentListViewModel: ObservableObject {
     @Published var docList: [Document] {
         didSet {
             autoSave()
-            print("SET!!!!!!!!")
         }
     }
     
@@ -39,25 +38,20 @@ class DocumentListViewModel: ObservableObject {
     }
     
     private func save(to url: URL) {
-        let thisFucntion = "\(String(describing: self)).\(#function)"
         do {
             let data: Data = try docList.json()
-            print("\(thisFucntion) json = \(String(data: data, encoding: .utf8) ?? "nil")")
             try data.write(to: url)
-            print("\(thisFucntion) success!")
-        } catch let encodingError where encodingError is EncodingError {
-            print("Error in \(thisFucntion). Couldn't encode Document as JSON because \(encodingError.localizedDescription)")
+            print("save: success!")
         } catch {
-            print("Error in \(thisFucntion): \(error)")
+            print("Error happend: \(error)")
         }
     }
     
     private func load(from url: URL) -> [Document] {
         do {
             let data = try Data(contentsOf: url)
-            print("Loading... = \(String(data: data, encoding: .utf8) ?? "nil")")
             let loaded = try JSONDecoder().decode([Document].self, from: data)
-            print("Success!")
+            print("load: Success!")
             return loaded
         }
         catch {
